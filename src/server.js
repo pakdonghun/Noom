@@ -1,5 +1,7 @@
 import http from "http";
-import { WebSocketServer } from 'ws';
+
+import { Server, Socket } from "socket.io";
+/* import { WebSocketServer } from 'ws'; */
 import express from "express";
 import path from 'path';
 const __dirname = path.resolve();
@@ -15,8 +17,21 @@ app.get("/*", (req,res) => res.redirect("/"));
 
 const handleListen = () => console.log(`Listening on http://localhost:3000`);
 
-const server = http.createServer(app);
+const httpServer = http.createServer(app);
+const wsServer = new Server(httpServer);
 
+wsServer.on("connection", (socket) => {
+  socket.on("enter_room", (msg, done) => {
+    console.log(msg);
+    setTimeout(() => {
+      done();
+    }, 5000);
+  });
+}); 
+
+  
+
+/* 
 const wss = new WebSocketServer({ server });
 
 const sockets = [];
@@ -37,7 +52,7 @@ const sockets = [];
           break
       }
       }); 
-  }); 
+  });  */
  
-server.listen(3000, handleListen);
+httpServer.listen(3000, handleListen);
 
