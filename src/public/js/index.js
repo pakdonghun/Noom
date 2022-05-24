@@ -15,6 +15,7 @@ function addMessage(message){
     ul.appendChild(li);
 };
 
+
 function handleMessageSubmit(event){
     event.preventDefault();
     const input = room.querySelector("#msg input");
@@ -23,6 +24,12 @@ function handleMessageSubmit(event){
         addMessage(`You: ${value}`);
     });
     input.value = "";
+};
+
+function handleNicknameSubmit(event){
+    event.preventDefault();
+    const input = room.querySelector("#name input");
+    socket.emit("nickname", input.value);
 };
 
 function showRoom(){
@@ -44,11 +51,6 @@ function handleRoomSubmit(event){
     input.value = "";
 };
 
-function handleNicknameSubmit(event){
-    event.preventDefault();
-    const input = form.querySelector("#name input");
-    socket.emit("nickname", input.value);
-}
 
 form.addEventListener("submit", handleRoomSubmit);
 
