@@ -1,7 +1,6 @@
 import http from "http";
 
 import { Server, Socket } from "socket.io";
-/* import { WebSocketServer } from 'ws'; */
 import express from "express";
 import path from 'path';
 const __dirname = path.resolve();
@@ -61,29 +60,6 @@ wsServer.on("connection", (socket) => {
 }); 
 
   
-
-/* 
-const wss = new WebSocketServer({ server });
-
-const sockets = [];
-
- wss.on("connection", (socket) => {
-   sockets.push(socket);
-   socket["nickname"] = "Anon";
-    console.log("Connected to Browser ✅");
-    socket.on("close", () => console.log("Disconnected from the Browser ❌"));
-    socket.on("message", (msg) => {
-      const message = JSON.parse(msg);
-      switch (message.type){
-        case "new_message":
-          sockets.forEach((aSocket) => aSocket.send(`${socket.nickname}: ${message.payload}`));
-          break
-        case "nickname":
-          socket["nickname"] = message.payload;
-          break
-      }
-      }); 
-  });  */
  
 httpServer.listen(3000, handleListen);
 
